@@ -14,9 +14,19 @@
 @prefix wforg: <http://data.webfoundation.org/organization/> .
 
 
-:obs1 a wfonto:Observation, qb:Observation ;
-	  rdfs:label "First observation" ;
-	  cex:md5-checksum "...checksum..." ;
-	  dcterms:issued 2014 ;
-	  dcterms:publisher wforg:WebFoundation ;
-	  .
+:student1 sh:nodeShape :UserShape ;
+  rdfs:label "Student 1" ;
+  :role :User .
+  
+:student2 sh:nodeShape :UserShape ;
+  rdfs:label "Student 2" ;
+  .
+  
+:badStudent3 sh:nodeShape :NonUserShape ;
+  rdfs:label "Student 3" ;
+  :role :NonUser .
+  
+:badStudent4 sh:nodeShape :NonUserShape ;
+  rdfs:label "Student 4" ;
+  :role :User, :NonUser .
+  

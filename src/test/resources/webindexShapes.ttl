@@ -14,26 +14,44 @@
 @prefix wfonto: <http://data.webfoundation.org/ontology/> . 
 @prefix dcterms: <http://purl.org/dc/terms/> . 
 @prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix cex: <http://purl.org/weso/ontology/computex#> .
+@prefix wforg: <http://data.webfoundation.org/organization/> .
 
 :ObservationShape
 	a sh:Shape ;
 	sh:scopeClass wfonto:Observation ;
 	sh:property [
 		sh:predicate rdf:type ;
-		sh:minCount 2 ;
-		sh:maxCount 2 ;
+		sh:qualifiedMinCount 1 ;
 		sh:qualifiedValueShape [
-			a sh:Shape ;   # Optional
-			sh:property [
-				sh:predicate rdf:type ;
-				sh:hasValue qb:Observation ;
-			]
+			sh:constraint [
+			  sh:in ( qb:Observation ) 
+			 ]
 		] ;
-		 # sh:qualifiedMinCount 1 ;
+	] ;
+	sh:property [
+		sh:predicate rdf:type ;
+		sh:qualifiedMinCount 1 ;
+		sh:qualifiedValueShape [
+			sh:constraint [
+			  sh:in ( wfonto:Observation ) 
+			 ]
+		] ;
+	] ;
+	sh:property [
+	   sh:predicate rdf:type ;
+	   sh:minCount 2 ;
+	   sh:maxCount 2
+	] ;
+	sh:property [
+		sh:predicate cex:md5-checksum ;
+		sh:minCount 0 ;
+		sh:maxCount 1 ;
+		sh:datatype xsd:string
 	] ;
 	sh:property [
 		sh:predicate rdfs:label ;
-		sh:minCount 1 ;
+		sh:minCount 0 ;
 		sh:maxCount 1 ;
 	] ;
 	sh:property [
@@ -41,7 +59,13 @@
 		sh:datatype xsd:integer ;
 		sh:minCount 0 ;
 		sh:maxCount 1 ;
-	] .
+	] ;  
+	sh:property [
+		sh:predicate dcterms:publisher ;
+		sh:hasValue wforg:WebFoundation ;
+		sh:minCount 0 ;
+		sh:maxCount 1 ;
+	]	.
 
 
 <> rdf:type sh:Graph ;

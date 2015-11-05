@@ -1,0 +1,12 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+:item1
+	a :Item ;
+	:code "AB" ;
+	:code "23" ;
+.
+
+

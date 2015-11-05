@@ -22,11 +22,21 @@ import java.io.ByteArrayOutputStream
 class TestShacl extends FunSpec with Matchers {
   
   describe("Shacl validator") {
-    describe("validate issues") {
+    ignore("validate issues") {
       validate("issuesData","issueShapes")
       validate("webindexData","webindexShapes")
       validate("issuesErrorsData","issueShapes",false)
+      validate("codeData","codeShapes")
     }
+    
+    describe("validate tests") {
+      validate("studentData","studentShape")
+      validate("groupData","groupShape")
+     // validate("groupParentExampleData","groupParentExampleShape")
+
+    }
+    
+  
     
     def validate(data: String, schema: String, ok: Boolean = true): Unit = {
       it(s"should validate $data with $schema") {

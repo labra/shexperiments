@@ -6,6 +6,6 @@ object TestShexcala extends {
 
   println("Testing ShExcala")
   val schema = Schema.fromFile("person.shex","SHEXC",None)
-  val data = RDF
+//  val data = RDF
 
 }
