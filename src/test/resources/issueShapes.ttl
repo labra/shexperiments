@@ -43,10 +43,9 @@ ex:UserShape
 		sh:minCount 1 ;
 	] .
 
-<http://topbraid.org/examples/issue>
-  rdf:type sh:Graph ;
-  rdfs:comment "Simple example" ;
-  rdfs:label "SHACL Example" ;
-  sh:shapesGraph <http://www.w3.org/ns/shacl> ;
+<> a sh:Graph ;
+   rdfs:comment "Simple example" ;
+   rdfs:label "SHACL Example" ;
+   sh:shapesGraph <http://www.w3.org/ns/shacl> ;
 .
 

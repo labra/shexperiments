@@ -1,58 +1,48 @@
 @prefix : <http://example.org/> .
-@prefix ex: <http://example.org/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
-ex:RejectionShape 
-	a sh:Shape ;
-    sh:property [
-		sh:predicate rdf:type ;
-		sh:hasValue ex:RejectionShape ;
-	] .
-	
-ex:ResolutionShape 
-	a sh:Shape ;
-    sh:property [
-		sh:predicate rdf:type ;
-		sh:hasValue ex:ResolutionShape ;
-	] .
-	
 
-ex:ClosedIssueShape
+:ClosedIssueShape
 	a sh:Shape ;
 	sh:constraint [
-		sh:valueShape [
-			sh:constraint [
-				a sh:OrConstraint ;
-				sh:shapes (
-					[
-						sh:property [
-							sh:predicate ex:resolution  ;
-							sh:valueShape ex:RejectionShape ;
-						]
-					]
-					[	sh:property [
-							sh:predicate ex:rejection ;
-							sh:valueShape ex:RejectionShape ;
-						]
-					]
-				)
+  	    a sh:OrConstraint ;
+		sh:shapes (
+		 [ sh:property [
+				sh:predicate :resolution  ;
+				sh:valueShape :ResolutionShape ;
+				sh:minCount 1 ;
 			]
+		 ]
+		 [	sh:property [
+			  sh:predicate :rejection ;
+			  sh:valueShape :RejectionShape ;
+			  sh:minCount 1 ;
+			]
+		 ]
+		)
 		] ;
-		sh:minCount 1 ;
-	] ;
 .
 
-ex:RejectionShape 
+:NotClosedIssueShape 
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :ClosedIssueShape
+  ] .
+
+	
+:RejectionShape 
 	a sh:Shape ;
     sh:property [
 		sh:predicate rdf:type ;
-		sh:hasValue ex:RejectionShape ;
+		sh:hasValue :RejectionShape ;
 	] .
-
 	
+:ResolutionShape 
+	a sh:Shape ;
+    sh:property [
+		sh:predicate rdf:type ;
+		sh:hasValue :ResolutionShape ;
+	] .

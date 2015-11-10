@@ -13,6 +13,12 @@
 @prefix cex: <http://purl.org/weso/ontology/computex#> .
 @prefix wforg: <http://data.webfoundation.org/organization/> .
 
+:Observation sh:scopeNode 
+   :obs1 .
+
+:NoObservation sh:scopeNode 
+   :noObs1 , 
+   :noObs2 .
 
 :obs1 a wfonto:Observation, qb:Observation ;
 	  rdfs:label "First observation" ;
@@ -20,3 +26,17 @@
 	  dcterms:issued 2014 ;
 	  dcterms:publisher wforg:WebFoundation ;
 	  .
+
+:noObs1 a wfonto:Observation ;
+	  rdfs:label "First observation" ;
+	  cex:md5-checksum "...checksum..." ;
+	  dcterms:issued 2014 ;
+	  dcterms:publisher wforg:WebFoundation ;
+	  .
+:noObs2 a wfonto:Observation, qb:Observation ;
+	  rdfs:label "First observation" ;
+	  cex:md5-checksum "...checksum..." ;
+	  dcterms:issued 2014 ;
+	  dcterms:publisher wforg:Another ;
+	  .
+	  

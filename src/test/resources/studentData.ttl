@@ -13,20 +13,18 @@
 @prefix cex: <http://purl.org/weso/ontology/computex#> .
 @prefix wforg: <http://data.webfoundation.org/organization/> .
 
+:UserShape sh:scopeNode :user1, :user2 .
+:NonUserShape sh:scopeNode :noUser3, :noUser4 .
 
-:student1 sh:nodeShape :UserShape ;
-  rdfs:label "Student 1" ;
-  :role :User .
+:user1 rdfs:label "User 1" ;
+       :role :User .
   
-:student2 sh:nodeShape :UserShape ;
-  rdfs:label "Student 2" ;
+:user2 rdfs:label "User 2" ;
   .
   
-:badStudent3 sh:nodeShape :NonUserShape ;
-  rdfs:label "Student 3" ;
+:noUser3 rdfs:label "User 3" ;
   :role :NonUser .
   
-:badStudent4 sh:nodeShape :NonUserShape ;
-  rdfs:label "Student 4" ;
+:noUser4 rdfs:label "User 4" ;
   :role :User, :NonUser .
   

@@ -7,9 +7,15 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
-:ItemShape
+:NoItem 
+  sh:constraint [
+    a sh:NotConstraint ;
+	sh:shape :Item 
+  ] .
+  
+
+:Item
 	a sh:Shape ;
-	sh:scopeClass :Item ;
 	sh:property [
 		sh:predicate :code ;
 		sh:qualifiedMinCount 1 ;
@@ -24,7 +30,7 @@
 		sh:qualifiedMinCount 1 ;
 		sh:qualifiedValueShape [
 		 sh:constraint [
-		   sh:pattern "\\d{2}" ;
+           sh:pattern "^[0-9]" ;
 		  ]
 		]
 	] ;

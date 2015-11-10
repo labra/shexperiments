@@ -1,38 +1,27 @@
 @prefix : <http://example.org/> .
-@prefix ex: <http://example.org/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix inst: <http://example.org/instance#> .
-@prefix wfonto: <http://data.webfoundation.org/ontology/> . 
-@prefix dcterms: <http://purl.org/dc/terms/> . 
-@prefix qb: <http://purl.org/linked-data/cube#> .
-@prefix cex: <http://purl.org/weso/ontology/computex#> .
-@prefix wforg: <http://data.webfoundation.org/organization/> .
 
+:ClosedIssueShape 
+  sh:scopeNode :i1, :i2, :i3 .
+:NotClosedIssueShape 
+  sh:scopeNode :bad1, :bad2, :bad3 .
 
-:i1 sh:nodeShape ex:ClosedIssueShape ;
-  ex:resolution :resolution1 .
+:RejectionShape sh:scopeNode :rejection1 .
+:Resolutionhape sh:scopeNode :resolution1 .
+ 
+:i1 :resolution :resolution1 .
 
-:i2 sh:nodeShape ex:ClosedIssueShape ;
-  ex:rejection :rejection1 .
+:i2 :rejection :rejection1 .
 
-:i3 sh:nodeShape ex:ClosedIssueShape ;
-  ex:resolution :resolution ;
-  ex:rejection :rejection .
+:i3 :resolution :resolution1 ;
+    :rejection :rejection1 .
   
-:badIssue1 sh:nodeShape ex:ClosedIssueShape ;
-  ex:resolution :rejection1 .
+:bad1 :resolution :rejection1 .
+:bad2 :resolution 23 .
+:bad3 :retolusion :resolution1 .
   
-:rejection1 sh:nodeShape :RejectionShape ;
-  a ex:RejectionShape .
+# These nodes are well defined  
+:rejection1 a :RejectionShape .
   
-:resolution1 sh:nodeShape :ResolutionShape ;
-  a ex:ResolutionShape .
+:resolution1 a :ResolutionShape .
    
-  
-

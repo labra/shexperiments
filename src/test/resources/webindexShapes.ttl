@@ -17,9 +17,8 @@
 @prefix cex: <http://purl.org/weso/ontology/computex#> .
 @prefix wforg: <http://data.webfoundation.org/organization/> .
 
-:ObservationShape
+:Observation
 	a sh:Shape ;
-	sh:scopeClass wfonto:Observation ;
 	sh:property [
 		sh:predicate rdf:type ;
 		sh:qualifiedMinCount 1 ;
@@ -49,6 +48,25 @@
 		sh:maxCount 1 ;
 		sh:datatype xsd:string
 	] ;
+	sh:constraint [
+  	    a sh:OrConstraint ;
+		sh:shapes (
+		 [ sh:property [
+				sh:predicate cex:computation  ;
+				sh:valueShape :Raw ;
+				sh:minCount 1 ;
+				sh:maxCount 1 ;
+			]
+		 ]
+		 [	sh:property [
+			  sh:predicate cex:computation ;
+			  sh:valueShape :Score ;
+			  sh:minCount 1 ;
+			  sh:maxCount 1 ;
+			]
+		 ]
+		)
+		] ;
 	sh:property [
 		sh:predicate rdfs:label ;
 		sh:minCount 0 ;
@@ -67,6 +85,15 @@
 		sh:maxCount 1 ;
 	]	.
 
+# For testing
+:NoObservation 
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :Observation
+  ] .
+
+	
 
 <> rdf:type sh:Graph ;
    rdfs:comment "WebIndex data" ;

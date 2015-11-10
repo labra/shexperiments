@@ -24,16 +24,18 @@ class TestShacl extends FunSpec with Matchers {
   describe("Shacl validator") {
     ignore("validate issues") {
       validate("issuesData","issueShapes")
-      validate("webindexData","webindexShapes")
       validate("issuesErrorsData","issueShapes",false)
+      
+      validate("studentData","studentShape")
       validate("codeData","codeShapes")
+      validate("groupData","groupShape")
+      validate("publicContractData","publicContractShapes")
     }
     
     describe("validate tests") {
-      validate("studentData","studentShape")
-      validate("groupData","groupShape")
+      validate("webindexData","webindexShapes")
+      
      // validate("groupParentExampleData","groupParentExampleShape")
-
     }
     
   
@@ -82,9 +84,4 @@ class TestShacl extends FunSpec with Matchers {
     }
   }
  
-  def model2Str(m: Model): String = {
-    val out = new ByteArrayOutputStream
-    RDFDataMgr.write(out,m,RDFFormat.TURTLE_PRETTY)
-    out.toString       
-  }
 }
