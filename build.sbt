@@ -22,10 +22,23 @@ libraryDependencies ++= Seq(
   , "org.scalatest" % "scalatest_2.11" % "2.2.0" % "test"
   ,	"org.scalacheck" %% "scalacheck" % "1.11.4" % "test"
   , "com.storm-enroute" %% "scalameter" % "0.8-SNAPSHOT"
-  , "es.weso" % "shexcala_2.11" % "0.5.8" excludeAll(ExclusionRule(organization = "org.slf4j"))  
+  , "es.weso" % "shexcala_2.11" % "0.6.0" excludeAll(ExclusionRule(organization = "org.slf4j"))  
   )
 
 autoCompilerPlugins := true
+
+
+// Binari packaging
+enablePlugins(JavaAppPackaging)
+
+packageSummary in Linux := "ShEx and SHACL experiments"
+packageSummary in Windows := "ShEx and SHACL experiments"
+packageDescription := " ShEx and SHACL experiments"
+
+maintainer in Windows := "WESO"
+maintainer in Debian := "Jose Emilio Labra <jelabra@gmail.es>"
+
+mainClass in Compile := Some("es.weso.main.Main")
 
 resolvers ++= Seq("snapshots", "releases").map(Resolver.sonatypeRepo)
 

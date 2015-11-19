@@ -1,0 +1,27 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix wf: <http://data.webfoundation.org#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+:Country sh:scopeNode :spain, :france .
+:NoCountry sh:scopeNode :x1 .
+
+:spain a wf:Country ;
+ rdfs:label "Spain" ;
+ wf:iso2 "es";
+ wf:iso3 "ESP" .
+
+:france 
+ rdfs:label "France" ;
+ wf:iso2 "fr" 
+ .
+ 
+:x1 a wf:Cunrry .
+
+:x2 a wf:Country ;
+  rdfs:label 1 .
+  
+:x3 a wf:Country ;
+  rdfs:label "X3", "XX" .

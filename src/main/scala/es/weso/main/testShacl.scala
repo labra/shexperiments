@@ -40,9 +40,9 @@ object testShacl extends App {
       return
     }
   
-    val results = ShaclValidator.validate(opts.data(), opts.shacl())
+    val (results, time) = ShaclValidator.validate(opts.data(), opts.shacl())
     println("Result: " + ShaclValidator.result2Str(results))
-    
+    println("Elapsed time: " + time + " ns")
    }
     
     

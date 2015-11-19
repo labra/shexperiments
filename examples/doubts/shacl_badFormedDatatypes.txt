@@ -1,0 +1,1 @@
+If I declare a value "200"^^xsd:dataTime the system raises warnings but it validates!

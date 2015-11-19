@@ -1,0 +1,58 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix wf: <http://data.webfoundation.org/ontology/>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix qb: <http://purl.org/linked-data/cube#> .
+
+:Observation a sh:Shape ;
+	sh:property [
+		sh:predicate rdf:type ;
+		sh:qualifiedMinCount 1 ;
+		sh:qualifiedValueShape [
+			sh:constraint [
+			  sh:in ( qb:Observation ) 
+			 ]
+		] ;
+	] ;
+	sh:property [
+		sh:predicate rdf:type ;
+		sh:qualifiedMinCount 1 ;
+		sh:qualifiedValueShape [
+			sh:constraint [
+			  sh:in ( wf:Observation ) 
+			 ]
+		] ;
+	] ;
+	sh:property [
+	   sh:predicate rdf:type ;
+	   sh:minCount 2 ;
+	   sh:maxCount 2
+	] ;
+ sh:property [
+	  sh:predicate rdfs:label ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	] ;
+ sh:property [
+	  sh:predicate wf:iso2 ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	] ;
+ sh:property [
+	  sh:predicate wf:iso3 ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	]
+.
+
+:NoCountry
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :Country
+  ] .

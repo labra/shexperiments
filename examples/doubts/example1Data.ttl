@@ -1,0 +1,15 @@
+# The following code validates...
+
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix wf: <http://data.webfoundation.org#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+:MyShape sh:scopeNode :x1, :x2 .
+
+:x1 a :Y .
+:x2 rdfs:label "Hi" .
+
+

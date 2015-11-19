@@ -1,0 +1,33 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+
+:UserShape a sh:Shape ;
+  sh:scopeClass :UserClass ;
+  sh:property [
+	  sh:predicate rdfs:label ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	] ;
+  sh:property [
+        sh:predicate :role ;
+        sh:hasValue :User ;
+        sh:filterShape [
+            sh:property [
+                sh:predicate :role ;
+                sh:minCount 1 ;
+            ]
+        ] ;        
+        sh:maxCount 1 ;
+  ] 
+  .
+
+:NoUserShape
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :UserShape
+  ] .

@@ -1,0 +1,97 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix wf: <http://data.webfoundation.org#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix cex: <http://purl.org/weso/ontology/computex#> .
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+
+:DataSet sh:scopeNode :d1.
+:Slice sh:scopeNode :s1 .
+:NoSlice sh:scopeNode :ns1 .
+:NoDataSet sh:scopeNode :nd1, :nd2 .
+:Observation sh:scopeNode :o1, :o2 .
+:NoObservation sh:scopeNode :noO1, :noO2 .
+:Indicator sh:scopeNode :i1 .
+:Country sh:scopeNode :spain, :france .
+:NoCountry sh:scopeNode :x1 .
+:Organization sh:scopeNode :org1 .
+
+
+:o1 a qb:Observation ;
+ cex:value "0.5"^^xsd:float ;
+ rdfs:label "Observation" ;
+ dct:issued "2002-05-30T09:00:00"^^xsd:dateTime ;
+ dct:publisher wf:WebFoundation ;
+ qb:dataSet :d1 ;
+ cex:ref-area :spain ;
+ cex:indicator :i1 .
+
+:o2 a qb:Observation ;
+ cex:value "0.5"^^xsd:float ;
+ rdfs:label "Observation" ;
+ dct:issued "2002-05-30T09:00:00"^^xsd:dateTime ;
+ qb:dataSet :d1 ;
+ cex:ref-area :spain ;
+ cex:indicator :i1 .
+ 
+:org1 rdfs:label "Organization1" ;
+  foaf:homepage <http://example.org/org1> .
+  
+:noO1 a qb:Observation ;
+ cex:value "0.5"^^xsd:float ;
+ rdfs:label "Observation" ;
+ dct:issued "200"^^xsd:float .
+
+:noO2 a qb:Observation ;
+ cex:value "0.5"^^xsd:float ;
+ rdfs:label "Observation" ;
+ dct:issued 200 .
+ 
+:i1 a wf:PrimaryIndicator ;
+ rdfs:label "I1" ;
+ rdfs:comment "Some comment" ;
+ skos:notation "Indicator" ;
+ wf:provider :org1 .
+
+:s1 a qb:Slice ;
+  qb:sliceStructure wf:sliceByYear ;
+  qb:observation :o1 ;
+  cex:indicator :i1 .
+  
+:ns1 a qb:NoSlice .
+
+:d1 a qb:DataSet ;
+  qb:structure wf:DSD ;
+  rdfs:label "D1" ;
+  qb:slice :s1 ;
+  dct:publisher :org1 .
+
+:nd2 a qb:DataSet ;
+  qb:structure wf:DSD ;
+  rdfs:label "D1" ;
+  qb:slice :ns1 .
+  
+:nd1 a qb:DataSet .
+
+:spain a wf:Country ;
+ rdfs:label "Spain" ;
+ wf:iso2 "es";
+ wf:iso3 "ESP" .
+
+:france 
+ rdfs:label "France" ;
+ wf:iso2 "fr" 
+ .
+ 
+:x1 a wf:Cunrry .
+
+:x2 a wf:Country ;
+  rdfs:label 1 .
+  
+:x3 a wf:Country ;
+  rdfs:label "X3", "XX" .

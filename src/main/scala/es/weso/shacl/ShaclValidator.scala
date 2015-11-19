@@ -20,7 +20,7 @@ import java.io.ByteArrayOutputStream
  
 
 object ShaclValidator {
-  def validate(data: String, schema: String): Model = {
+  def validate(data: String, schema: String): (Model, Long) = {
     try {
       val dataModel = RDFDataMgr.loadModel(data)
       val shapesModel = RDFDataMgr.loadModel(schema)
@@ -40,9 +40,12 @@ object ShaclValidator {
       val dataset = ARQFactory.get.getDataset(dataModel)
       dataset.addNamedModel(shapesGraphURI.toString(), combined)
       
+      val startTime = System.nanoTime()
       val results = ModelConstraintValidator.get.validateModel(dataset, shapesGraphURI, null, false, null)
       results.setNsPrefixes(shaclModel)
-      results
+      val endTime = System.nanoTime()
+      val time = endTime - startTime
+      (results,time)
     } catch {
       case e: Exception => {
         val model = ModelFactory.createDefaultModel
@@ -50,7 +53,7 @@ object ShaclValidator {
             model.createResource(), 
             model.createProperty("exception"), 
             model.createLiteral(e.toString))
-        model    
+        (model,0)    
       }
     }
   }
