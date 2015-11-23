@@ -9,37 +9,60 @@
 @prefix dct: <http://purl.org/dc/terms/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix org: <http://www.w3.org/ns/org#> .
 
+:Country sh:scopeNode :spain, :france .
 :DataSet sh:scopeNode :d1.
 :Slice sh:scopeNode :s1 .
-:NoSlice sh:scopeNode :ns1 .
-:NoDataSet sh:scopeNode :nd1, :nd2 .
 :Observation sh:scopeNode :o1, :o2 .
-:NoObservation sh:scopeNode :noO1, :noO2 .
 :Indicator sh:scopeNode :i1 .
-:Country sh:scopeNode :spain, :france .
-:NoCountry sh:scopeNode :x1 .
-:Organization sh:scopeNode :org1 .
+:Organization sh:scopeNode :org1, :org2 .
 
-
-:o1 a qb:Observation ;
+:o1 a qb:Observation, wf:Observation ;
  cex:value "0.5"^^xsd:float ;
  rdfs:label "Observation" ;
  dct:issued "2002-05-30T09:00:00"^^xsd:dateTime ;
  dct:publisher wf:WebFoundation ;
  qb:dataSet :d1 ;
  cex:ref-area :spain ;
- cex:indicator :i1 .
+ cex:indicator :i1 ;
+ wf:source <http://example.org/data> .
 
-:o2 a qb:Observation ;
+ 
+:o2 a qb:Observation, wf:Observation ;
  cex:value "0.5"^^xsd:float ;
  rdfs:label "Observation" ;
  dct:issued "2002-05-30T09:00:00"^^xsd:dateTime ;
  qb:dataSet :d1 ;
  cex:ref-area :spain ;
- cex:indicator :i1 .
+ cex:indicator :i1 ;
+ cex:computation [ a cex:Computation ] .
+
+:noO3 a qb:Observation, wf:Observation ;
+ cex:value "0.5"^^xsd:float ;
+ rdfs:label "Observation" ;
+ dct:issued "2002-05-30T09:00:00"^^xsd:dateTime ;
+ dct:publisher wf:WebFoundation ;
+ qb:dataSet :d1 ;
+ cex:ref-area :spain ;
+ cex:indicator :i1 ;
+ wf:source <http://example.org/data> ;
+ cex:computation [a cex:Computation] .
  
-:org1 rdfs:label "Organization1" ;
+:org1 a org:Organization ;
+  rdfs:label "Organization1" ;
+  foaf:homepage <http://example.org/org1> .
+
+:org2 a org:Organization, wf:Organization ; 
+  rdfs:label "Organization2" ;
+  foaf:homepage <http://example.org/org1> .
+  
+:noOrg2 a wf:Organization ; 
+  rdfs:label "No Organization2" ;
+  foaf:homepage <http://example.org/org1> .
+  
+:noOrg1 
+  rdfs:label "Organization1" ;
   foaf:homepage <http://example.org/org1> .
   
 :noO1 a qb:Observation ;
