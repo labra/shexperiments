@@ -1,0 +1,13 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+:Item sh:scopeNode :i1  .
+# :NoItem sh:scopeNode :ni1, :ni2, :ni3, :ni4 .
+
+:i1 :iso2 "ab" .
+:ni1 :iso2 "abc" .
+:ni2 :iso2 234 .
+:ni3 :iso2 "a" .
+:ni4 :iso2 "ab", "cd" .

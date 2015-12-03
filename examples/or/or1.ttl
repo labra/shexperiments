@@ -1,0 +1,24 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+:ok1 rdfs:label "Hi" .
+:ok2 rdfs:comment "Hi hi" .
+:ok3 a :Item; rdfs:label "Hi3" .
+:ok4 :p "Hi"; rdfs:comment "Hi4" .
+:ok5 :p "Hi"; rdfs:label "Hi5" .
+
+
+:bad1 a :Item .
+:bad2 rdfs:label "Hi"; rdfs:comment "Hi!" .
+:bad3 rdfs:label 23 .
+
+:Item sh:scopeNode :ok1, :ok2, :ok3, :ok4, :ok5 .
+:NoItem sh:scopeNode :bad1, :bad2, :bad3 .
+
+:Both sh:scopeNode :bad2 .
+:NoBoth sh:scopeNode :ok1 .
+:NoBoth sh:scopeNode :ok2 .
+:CommentShape sh:scopeNode :ok2 .
+:LabelShape sh:scopeNode :ok1 .

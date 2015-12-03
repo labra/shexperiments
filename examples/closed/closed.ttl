@@ -1,0 +1,16 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+:Item sh:scopeNode :x1, :x2 .
+#:NoItem sh:scopeNode :y1, :y2 .
+
+:x1 a :X; :p "blah1" .
+:x2 a :X, :Y; :p "blah2" .
+
+:y1 :p "Kiko", "Luis" .
+:y2 :p "Pepe" ; :q "Luis" .
+
+
+

@@ -1,0 +1,19 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+:Item sh:scopeNode :i1  .
+:NoItem sh:scopeNode :ni1, :ni2, :ni3, :ni4 .
+
+:i1 rdfs:label "i1"; :code 23 .
+:i2 rdfs:label "i2"; :code 345; :p 23 .
+
+:ni1 :code 23 .
+:ni2 rdfs:label "Hi"; :code "John" .
+:ni3 rdfs:label "Hi", "John"; 
+     :code "John" .
+:ni4 rdfs:label "Hi"; :code 23, 34 .
+
+

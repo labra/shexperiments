@@ -4,6 +4,7 @@ import org.rogach.scallop._
 import org.rogach.scallop.exceptions._
 import es.weso.shacl._
 
+
 object Main extends App {
   
     override def main(args: Array[String]): Unit = {

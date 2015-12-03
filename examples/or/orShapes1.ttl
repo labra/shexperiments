@@ -1,0 +1,85 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+
+:LabelShape a sh:Shape ;
+  sh:property [
+	  sh:predicate rdfs:label ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 
+  ] .
+
+:CommentShape a sh:Shape ;
+  sh:property [
+	  sh:predicate rdfs:comment ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 
+  ] .
+  
+:Both sh:constraint [
+   a sh:AndConstraint ;
+   sh:shapes ( :LabelShape :CommentShape )
+  ]
+.
+
+ 
+  
+:Item a sh:Shape ;
+ sh:constraint [
+ a sh:OrConstraint ;
+ sh:shapes (
+	[ sh:property [
+	  sh:predicate rdfs:label ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	]]
+	[ sh:property [
+	  sh:predicate rdfs:comment ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	]]
+  ) 
+ ] ;
+ sh:constraint [
+  a sh:NotConstraint ;
+  sh:shape [
+    sh:constraint [
+    a sh:AndConstraint ;
+    sh:shapes ( 
+	 [sh:property [
+	  sh:predicate rdfs:label ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 
+     ]]
+	 [sh:property [
+	  sh:predicate rdfs:comment ;
+	  sh:datatype xsd:string ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 
+     ]] )
+   ]
+  ]
+ ] 
+.
+
+:NoItem 
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :Item
+  ] .
+
+:NoBoth
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :Both
+  ] .
+

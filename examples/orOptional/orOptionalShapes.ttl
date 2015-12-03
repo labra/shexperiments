@@ -1,0 +1,43 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:Item a sh:Shape ;
+ sh:constraint [
+ a sh:OrConstraint ;
+ sh:shapes (
+	[ sh:property [
+	  sh:predicate :code ;
+	  sh:valueShape :A ;
+	  sh:minCount 0 ;
+	  sh:maxCount 1 ;
+	]]
+	[ sh:property [
+	  sh:predicate :code ;
+	  sh:valueShape :B ;
+	  sh:minCount 0 ;
+	  sh:maxCount 1 ;
+	]]
+ ) 
+].
+
+:A a sh:Shape ;
+ sh:property [
+  sh:predicate :a ;
+  sh:minCount 1 ;
+  sh:maxCount 1
+ ] .
+ 
+:B a sh:Shape ;
+ sh:property [
+  sh:predicate :b ;
+  sh:minCount 1 ;
+  sh:maxCount 1
+ ] . 
+ 
+:NoItem 
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :Item
+  ] .

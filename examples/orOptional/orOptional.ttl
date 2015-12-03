@@ -1,0 +1,13 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ok1 :code [ :a 1 ] .
+:ok2 :code [ :b 1 ] .
+:ok3 :a 1 .
+
+:bad1 :code 1 .
+:bad2 :code [ :a 1 ], [ :b 1 ] .
+
+:Item sh:scopeNode :ok1, :ok2, :ok3 .
+:NoItem sh:scopeNode :bad1, :bad2 .

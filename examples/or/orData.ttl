@@ -1,0 +1,20 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ok1 a :Item; :source <http://example.org/> .
+:ok2 a :Item; :computation [ a :Computation ] .
+
+:bad1 a :Item .
+:bad2 a :Item ;
+ :source <http://example.org/>;
+ :computation  [ a :Computation ] .
+
+:Item sh:scopeNode :ok1, :ok2.
+#:NoItem sh:scopeNode :bad1, :bad2 .
+
+#:Both sh:scopeNode :bad2 .
+#:HasComputation sh:scopeNode :ok2, :bad2 .
+#:HasSource sh:scopeNode :bad2 .
+#:NoBoth sh:scopeNode :ok1 .
+#:NoBoth sh:scopeNode :ok2 .

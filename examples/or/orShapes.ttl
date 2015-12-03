@@ -1,0 +1,103 @@
+@prefix : <http://example.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+:HasSource a sh:Shape ;
+  sh:property [
+	  sh:predicate :source ;
+	  sh:nodeKind sh:IRI ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 
+ ]
+.
+
+:HasComputation a sh:Shape ;
+	sh:property [
+	  sh:predicate :computation ;
+	  sh:valueShape :Computation ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	]
+.
+
+:Both a sh:Shape ;
+ sh:constraint [
+  a sh:AndConstraint ;
+  sh:shapes (
+	:HasSource
+    :HasComputation	
+  )
+ ] .
+ 
+:Item a sh:Shape ;
+ sh:property [
+  sh:predicate rdf:type ;
+  sh:hasValue :Item ;
+  sh:minCount 1 ;
+  sh:maxCount 1
+ ] ;
+ sh:constraint [
+ a sh:OrConstraint ;
+ sh:shapes (
+	[ sh:property [
+	  sh:predicate :source ;
+	  sh:nodeKind sh:IRI ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	]]
+	[ sh:property [
+	  sh:predicate :computation ;
+	  sh:valueShape :Computation ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	]]
+  ) 
+ ] ;
+ sh:constraint [
+  a sh:NotConstraint ;
+  sh:shape [ 
+  sh:constraint [
+  a sh:AndConstraint ;
+  sh:shapes (
+   [ sh:property [
+	  sh:predicate :source ;
+	  sh:nodeKind sh:IRI ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 
+   ]]
+   [ sh:property [
+	  sh:predicate :computation ;
+	  sh:valueShape :Computation ;
+	  sh:minCount 1 ;
+	  sh:maxCount 1 ;
+	]
+   ] 
+  )
+  ]
+  ]
+ ] 
+.
+
+:Computation a sh:Shape ;
+ sh:property [
+  sh:predicate rdf:type ;
+  sh:hasValue :Computation ;
+  sh:minCount 1 ;
+  sh:maxCount 1
+ ] .
+ 
+:NoItem 
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :Item
+  ] .
+
+:NoBoth
+  a sh:Shape ;
+  sh:constraint [
+   a sh:NotConstraint;
+   sh:shape :Both
+  ] .
+  
